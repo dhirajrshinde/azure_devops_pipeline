@@ -1,0 +1,17 @@
+# azure-pipelines.yml
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: TerraformInstaller@1
+    inputs:
+      terraformVersion: '1.5.7'
+
+  - script: |
+      terraform init
+      terraform validate
+      terraform plan
+    displayName: 'Run Terraform Locally'
